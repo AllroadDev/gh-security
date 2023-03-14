@@ -11,10 +11,12 @@ jobs:
         env: 
           TITLE: ${{ github.event.issue.title }}
         run: |
-          issue_title="${{ github.event.issue.title }}"
+          
           if [[ "$TITLE" == *"bug"* ]]; then
           echo "Issue is about a bug!"
           else
           echo "Issue is not about a bug"
           fi
 #14 -- we extract the title of the issue that was created, and store it in a temporary variable ("issue_title") here in my shell.
+
+#issue_title="${{ github.event.issue.title }}"
