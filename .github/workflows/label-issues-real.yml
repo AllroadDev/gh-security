@@ -1,0 +1,21 @@
+name: Label Issues (Permissions Example)
+on: 
+  issues: #this workflow runs whenever a new issue is open for the GitHub Repository in which this code is stored
+    types:
+      - opened
+jobs:
+  assign-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign label #Performs only one step 
+        if: contains(github.event.issue.title, 'bug')
+        run: |
+          curl -X POST \
+          --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \ 
+          -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          -H 'content-type: application/json' \
+          -d '{
+              "labels": ["bug"]
+            }' \
+          --fail
+
